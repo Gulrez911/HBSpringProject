@@ -18,6 +18,7 @@ body {
 		<table>
 			<form:form action="save" modelAttribute="student" method="post">
 				<form:hidden path="id" />
+				<form:hidden path="isDeleted" value="false"/>
 				<tr>
 					<td>First Name:</td>
 					<td><form:input path="fname" /></td>

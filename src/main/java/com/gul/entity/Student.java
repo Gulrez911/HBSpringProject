@@ -1,13 +1,19 @@
 package com.gul.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Proxy;
+import org.hibernate.annotations.Where;
+
 @Entity
 @Table
+@Where(clause = "isDeleted='false'")
+@Proxy(lazy = false)
 public class Student {
 
 	@Id
@@ -17,6 +23,16 @@ public class Student {
 	private String lname;
 	private String email;
 	private String password;
+	@Column
+	private Boolean isDeleted;
+
+	public Boolean getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(Boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 
 	public int getId() {
 		return id;
@@ -61,7 +77,6 @@ public class Student {
 	@Override
 	public String toString() {
 		return "Student [id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email
-				+ ", password=" + password + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", password=" + password + ", isDeleted=" + isDeleted + "]";
 	}
 }

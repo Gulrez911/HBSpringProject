@@ -36,6 +36,7 @@ public class HomeController {
 
 	@GetMapping(value = { "/", "add" })
 	public String home(Model model) {
+		System.out.println(repo.listStudent());
 		model.addAttribute("student", new Student());
 		return "home";
 	}
@@ -67,7 +68,10 @@ public class HomeController {
 	@GetMapping("delete")
 	public ModelAndView delete(@RequestParam("id") int id) {
 		ModelAndView mav = new ModelAndView("list");
-		repo.deleteById(id);
+		Student std =repo.getOne(id);
+		 std.setIsDeleted(true);
+		repo.saveAndFlush(std);
+//		repo.deleteById(id);
 		List<Student> list = repo.findAll();
 		mav.addObject("list", list);
 		return mav;
