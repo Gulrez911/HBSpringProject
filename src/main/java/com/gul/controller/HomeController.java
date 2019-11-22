@@ -60,7 +60,7 @@ public class HomeController {
 	@GetMapping("update")
 	public ModelAndView update(@RequestParam("id") int id) {
 		ModelAndView mav = new ModelAndView("home");
-		Optional<Student> student = repo.findById(id);
+		 Student  student = repo.getOne(id);
 		mav.addObject("student", student);
 		return mav;
 	}
